@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sync with another user</title>
+    <link rel = "stylesheet" href="style.css">
+</head>
+<body>
+<div class = "container">
+    <h2>Sync with another user:</h2>
+    <input type = "email" id = "email_sync" placeholder = "Email" required>
+    <button id = "sync-btn">Sync</button>
+    <p id = "error_sync-msg"></p>
+
+    <h2>Share a snapshot of your calendar with another user:</h2>
+    <input type = "email" id = "email_to_share" placeholder = "Email" required>
+    <button id = "share-btn">Share</button>
+    <p id = "error_share-msg"></p>
+    <a href = "calendar.html"> Cancel </a>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src = "sync.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Input event:</title>
+    <link rel = "stylesheet" href="style.css">
+</head>
+<body>
+<div class = "container">
+    <h2>Input Event</h2>
+    <h3> Select day of the week </h3>
+    <select id="dayDropdown">
+        <option value="">--Select a Day--</option>
+        <option value="Sunday">Sunday</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+    </select>
+    <h3> Enter start time: </h3>
+    <input type = "time" id = "event_time_start" placeholder = "Time for event" required>
+    <h3> Enter end time: </h3>
+    <input type = "time" id = "event_time_end" placeholder = "Time for event" required>
+    <h3> Enter event name: </h3>
+    <input type = "text" id = "name_event" placeholder = "Event" required>
+    <button id = "eventInput-btn">Save</button>
+    <p id = "error-msg">Error</p>
+    <a href = "calendar.html"> Cancel </a>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src = "eventData.js"></script>
+</body>
+</html>

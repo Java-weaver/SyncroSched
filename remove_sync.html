@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View connected user</title>
+    <link rel = "stylesheet" href="style.css">
+</head>
+<body>
+<div class = "container">
+    <h2>User currently that you are in sync with:</h2>
+    <p id = "error_get_sync-msg"></p>
+
+
+    <h2>Remove Users:</h2>
+    <input type = "email" id = "email_to_share" placeholder = "Email" required>
+    <button id = "remove-btn">REMOVE</button>
+    <p id = "error_remove_sync-msg"></p>
+    <a href = "calendar.html"> Go back to calendar </a>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src = "auth.js"></script>
+</body>
+</html>

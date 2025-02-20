@@ -1,0 +1,16 @@
+{
+  "name": "mobileappsem2_final_project_important",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@supabase/supabase-js": "2.45.4"
+  },
+  "private": true
+}

@@ -1,0 +1,28 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: cornflowerblue;
+}
+
+.container{
+    max-width: 480px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    box-Shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+button{
+    background-color: cadetblue;
+    border: none;
+    cursor: pointer;
+}
+button:hover{
+    background-color: cadetblue;
+}
+
+#error-msg{
+    color: red;
+
+}
+.highlight {
+    background-color: #ffcc00; /* Highlight color */
+}
