@@ -104,8 +104,7 @@ timeSlots.forEach(slot => {
         const columnIndex = Array.from(slot.parentElement.children).indexOf(slot); // Get the column index based on the slot's position in its parent
 
         if (!firstClick) {
-            // First click
-            firstClick = slot;
+            firstClick = slot; //First click
             slot.classList.add('highlight');
         } else {
             // Second click
