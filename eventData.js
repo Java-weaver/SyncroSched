@@ -14,7 +14,6 @@ eventBtn?.addEventListener("click", async () => {
     const dropdown = document.getElementById('dayDropdown');
     const selectedValue = dropdown.value;
 
-
     console.log("Start Time:", startTime);
     console.log("End Time:", endTime);
     console.log("Event Name:", eventName);
@@ -83,15 +82,12 @@ eventBtn?.addEventListener("click", async () => {
         document.getElementById("error-msg").textContent = insertError.message;
     } else {
         console.log("Finished");
-
         async function fetchRows(UEmail) {
             // Fetch a specific row from the 'events' table
             const { data, error } = await supabase
                 .from('table2')
                 .select('*') // Select all columns
                 .eq('email_event', UEmail) // Replace 'id' and '1' with your column and value to filter
-
-
             if (error) {
                 console.error('Error fetching row:', error);
             } else {
@@ -101,7 +97,6 @@ eventBtn?.addEventListener("click", async () => {
 
 // Call the function to fetch and log the row
         fetchRows(emailEvent);
-
         //window.location.href = 'calendar.html';
     }
 });

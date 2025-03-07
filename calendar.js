@@ -1,4 +1,3 @@
-
 const monthYear = document.getElementById('monthYear');
 const daysContainer = document.getElementById('days');
 const prevButton = document.getElementById('prev');
@@ -6,7 +5,6 @@ const nextButton = document.getElementById('next');
 const settingButton = document.getElementById('settings');
 //const eventButton = document.getElementById('events');
 const dayOfWeekDisplay = document.getElementById('dayOfWeek');
-
 
 //SMALL CALENDER SCRIPT
 let currentDate = new Date();
@@ -46,6 +44,13 @@ function renderCalendar() {
 
         daysContainer.appendChild(dayButton);
     }
+    const totalCells = firstDay + totalDays;
+    const emptyCells = (totalCells % 7 === 0) ? 0 : 7 - (totalCells % 7);
+    for (let i = 0; i < emptyCells; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.classList.add('day');
+        daysContainer.appendChild(emptyDay);
+    }
 }
 
 /*function highlightWeek(day, firstDay) {
@@ -65,8 +70,7 @@ function renderCalendar() {
             allDays[indexToHighlight].classList.add('highlight');
         }
     }
-} */
-
+}*/
 
 
 function showDayOfWeek(day, month, year) {
@@ -95,38 +99,53 @@ settingButton.addEventListener('click', () => {
     window.location.href = 'profile.html';
 });
 
-//LARGE EVENT GRID SCRIPT
-const timeSlots = document.querySelectorAll('.time-slot');
-let firstClick = null;
+/*Highlight Grid*/
+let highlightedSlots = [];
+timeSlots.forEach((slot, index) => {
 
-timeSlots.forEach(slot => {
     slot.addEventListener('click', () => {
-        const columnIndex = Array.from(slot.parentElement.children).indexOf(slot); // Get the column index based on the slot's position in its parent
-
-        if (!firstClick) {
-            firstClick = slot; //First click
-            slot.classList.add('highlight');
-        } else {
-            // Second click
-            if (firstClick.parentElement === slot.parentElement) { // Check if both clicks are in the same row
-                const firstIndex = Array.from(timeSlots).indexOf(firstClick);
-                const secondIndex = Array.from(timeSlots).indexOf(slot);
-
-                // Determine the range of indices to highlight
-                const start = Math.min(firstIndex, secondIndex);
-                const end = Math.max(firstIndex, secondIndex);
-
-                // Highlight all items in the range
-                for (let i = start; i <= end; i++) {
-                    const currentItem = timeSlots[i];
-                    if (currentItem.parentElement === slot.parentElement) { // Ensure it's in the same column
-                        currentItem.classList.add('highlight');
-                    }
-                }
+        if (!firstClick) {//First click
+            firstClick = slot; //Store  first clicked slot
+            slot.classList.add('highlight'); //Highlight first clicked slot
+            highlightedSlots[0] = index; //Save index of first highlighted slot
+        } else {//Second click
+            if (firstClick.parentElement === slot.parentElement) { //Check if both clicks are in the same row
+                //Highlight second clicked slot
+                slot.classList.add('highlight'); //Highlight second click
+                highlightedSlots[1] = index; //Save index of second highlighted slot
             }
-            // Reset first click
-            firstClick.classList.remove('highlight');
-            firstClick = null;
+            //Save both indices in local storage
+            localStorage.setItem('highlightedSlots', JSON.stringify(highlightedSlots));
+            //Reset first click for next selection
+            firstClick = null; //Reset first click for next selection
         }
     });
 });
+// Load highlighted slots from local storage on page load
+window.onload = () => {
+    const savedSlots = localStorage.getItem('highlightedSlots');
+    if (savedSlots) {
+        highlightedSlots = JSON.parse(savedSlots);
+        highlightedSlots.forEach(slotIndex => {
+            if (slotIndex !== undefined) {
+                const highlightedSlot = timeSlots[slotIndex];
+                if (highlightedSlot) {
+                    highlightedSlot.classList.add('highlight');
+                }
+            }
+        });
+    }
+};
+/*async function fetchRows(UEmail) {
+    // Fetch a specific row from the 'events' table
+    const { data, error } = await supabase
+        .from('table2')
+        .select('*') // Select all columns
+        .eq('email_event', UEmail)}// Replace 'id' and '1' with your column and value to filter*/
+
+/* Placeholder function for navigation
+function navigateToForm() {
+    // Here you would implement the logic to navigate to the form
+    // For example, you could change the window location or show a modal
+    console.log("Navigating to form...");
+}*/

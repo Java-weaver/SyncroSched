@@ -8,13 +8,13 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0; /* Remove default margin */
-            background-color: #f0f0f0;
+            background-color: #ffabc3;
             position: relative; /* Set position to relative for absolute positioning of children */
         }
         .calendar {
-            border: 1px solid #ccc;
+            border: 1px solid #cf4e04;
             border-radius: 8px;
-            background: white;
+            background: #91e9ff;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px; /* Set a fixed width for the calendar */
@@ -81,7 +81,7 @@
             position: absolute; /* Position the SyncTable absolutely */
             top: 20px; /* Distance from the top */
             right: 20px; /* Distance from the right */
-            background-color: #fff; /* White background for contrast */
+            background-color: #F1F58F; /* background */
             border: 1px solid #ccc; /* Light border */
             border-radius: 8px; /* Rounded corners */
             margin: 20px; /* Margin around the event grid */
@@ -99,15 +99,22 @@
             padding: 10px;
             font-weight: bold;
         }
+        .date {
+            background-color: #466aee; /* Royal Blue for day cells */
+            color: white; /* Text color for day cells */
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
         .time-slot {
             border: 1px solid #ccc; /* Light border for time slots */
             border-radius: 5px; /* Rounded corners */
             padding: 10px;
             text-align: center;
-            background-color: #f9f9f9; /* Light background for time slots */
+            background-color: #F1F58F; /* Light background for time slots */
         }
         .time-slot:hover {
-            background-color: #e0e0e0; /* Light gray on hover */
+            background-color: #d8dc80; /* Dark yellow on hover */
         }
         a {
             text-decoration: none; /* Remove underline from links */
@@ -123,11 +130,24 @@
             color: #4CAF50; /* Text color */
             border: none; /* No border */
             border-radius: 5px; /* Rounded corners */
-            cursor: pointer; /* Pointer cursor on hover */
-            background-image: url('https://files.oaiusercontent.com/file-QcUBr2Vh23ALertowf1aQr?se=2025-01-30T13%3A52%3A49Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Da8b6493e-5b3b-4c0f-bda8-1b95a5977e1e.webp&sig=GiuqNohfZt1jqhdZVIVMGvTl13BPtDWh/djHRLrKF/c%3D'); /* Replace with your image URL */
+            cursor: pointer; /* Pointer cursor on hover  */
+            background-image: url('https://djworx.com/wp-content/uploads/2017/07/PRIME-SYNC-BUTTON-768x590.jpg');
             background-size: contain;
-
         }
+
+        .custom_add_event-button {
+            width: 75px; /* Set width */
+            height: 75px; /* Set height */
+            font-size: 16px; /* Set font size */
+            background-color: #4CAF50; /* Example background color */
+            color: #4CAF50; /* Text color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            background-image: url('https://djworx.com/wp-content/uploads/2017/07/PRIME-SYNC-BUTTON-768x590.jpg');
+            background-size: contain;
+        }
+
         .custom_sync-button:hover {
             background-color: #e0e0e0; /* Light gray on hover */
         }
@@ -138,7 +158,7 @@
             height: 100%; /* Make the link fill the height of the time slot */
         }
         .highlight {
-            background-color: #FFD700; /* Highlight color for the selected week */
+            background-color: #ffd000; /* Highlight color for the selected week */
             color: black; /* Change text color for better contrast */
         }
 
@@ -147,12 +167,17 @@
 <body>
 
 <div class="container">
-    <div class="event-grid" id="eventGrid"> <div class="sync-button">
-        <button class="custom_sync-button" id="Sync"><a href="sync.html"></a></button> </div>
+    <div class="event-grid" id="eventGrid"><div class="sync-button">
+        <button class="custom_sync-button" id="Sync"><a href="sync.html"></a></button>
+        <h3 style="margin:0;"></h3>
+        <button class="custom_sync-button" id="Event"><a href="sync.html"></a></button>
+    </div>
 
         <h3 style="grid-column: span 8; text-align: center;">SyncTable</h3>
+
+
         <!-- Days of the week -->
-        <div class="day">Time</div>
+        <div class="day"></div>
         <div class="day">Sunday</div>
         <div class="day">Monday</div>
         <div class="day">Tuesday</div>
@@ -161,233 +186,242 @@
         <div class="day">Friday</div>
         <div class="day">Saturday</div>
 
+        <!-- Days dates -->
+        <div class="date">Time</div>
+        <div class="date">1</div>
+        <div class="date">2</div>
+        <div class="date">3</div>
+        <div class="date">4</div>
+        <div class="date">5</div>
+        <div class="date">6</div>
+        <div class="date">7</div>
 
         <!-- Time slots -->
         <div class="time-slot">12:00 AM</div>
         <div class="time-slot" id="12:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="12:01"></div>
+        <div class="time-slot" id="12:03"></div>
+        <div class="time-slot" id="12:04"></div>
+        <div class="time-slot" id="12:05"></div>
+        <div class="time-slot" id="12:06"></div>
+        <div class="time-slot" id="12:07"></div>
 
         <div class="time-slot">1:00 AM</div>
-        <div class="time-slot" id="1:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="1:00"></div>
+        <div class="time-slot" id="1:01"></div>
+        <div class="time-slot" id="1:03"></div>
+        <div class="time-slot" id="1:04"></div>
+        <div class="time-slot" id="1:05"></div>
+        <div class="time-slot" id="1:06"></div>
+        <div class="time-slot" id="1:07"></div>
 
         <div class="time-slot">2:00 AM</div>
-        <div class="time-slot" id="2:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="2:00"></div>
+        <div class="time-slot" id="2:01"></div>
+        <div class="time-slot" id="2:03"></div>
+        <div class="time-slot" id="2:04"></div>
+        <div class="time-slot" id="2:05"></div>
+        <div class="time-slot" id="2:06"></div>
+        <div class="time-slot" id="2:07"></div>
 
         <div class="time-slot">3:00 AM</div>
-        <div class="time-slot" id="3:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="3:00"></div>
+        <div class="time-slot" id="3:01"></div>
+        <div class="time-slot" id="3:03"></div>
+        <div class="time-slot" id="3:04"></div>
+        <div class="time-slot" id="3:05"></div>
+        <div class="time-slot" id="3:06"></div>
+        <div class="time-slot" id="3:07"></div>
 
         <div class="time-slot">4:00 AM</div>
-        <div class="time-slot" id="4:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="4:00"></div>
+        <div class="time-slot" id="4:01"></div>
+        <div class="time-slot" id="4:03"></div>
+        <div class="time-slot" id="4:04"></div>
+        <div class="time-slot" id="4:05"></div>
+        <div class="time-slot" id="4:06"></div>
+        <div class="time-slot" id="4:07"></div>
 
         <div class="time-slot">5:00 AM</div>
-        <div class="time-slot" id="5:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="5:00"></div>
+        <div class="time-slot" id="5:01"></div>
+        <div class="time-slot" id="5:03"></div>
+        <div class="time-slot" id="5:04"></div>
+        <div class="time-slot" id="5:05"></div>
+        <div class="time-slot" id="5:06"></div>
+        <div class="time-slot" id="5:07"></div>
 
         <div class="time-slot">6:00 AM</div>
-        <div class="time-slot" id="6:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="6:00"></div>
+        <div class="time-slot" id="6:01"></div>
+        <div class="time-slot" id="6:03"></div>
+        <div class="time-slot" id="6:04"></div>
+        <div class="time-slot" id="6:05"></div>
+        <div class="time-slot" id="6:06"></div>
+        <div class="time-slot" id="6:07"></div>
 
         <div class="time-slot">7:00 AM</div>
-        <div class="time-slot" id="7:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="7:00"></div>
+        <div class="time-slot" id="7:01"></div>
+        <div class="time-slot" id="7:03"></div>
+        <div class="time-slot" id="7:04"></div>
+        <div class="time-slot" id="7:05"></div>
+        <div class="time-slot" id="7:06"></div>
+        <div class="time-slot" id="7:07"></div>
 
         <div class="time-slot">8:00 AM</div>
-        <div class="time-slot" id="8:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="8:00"></div>
+        <div class="time-slot" id="8:01"></div>
+        <div class="time-slot" id="8:03"></div>
+        <div class="time-slot" id="8:04"></div>
+        <div class="time-slot" id="8:05"></div>
+        <div class="time-slot" id="8:06"></div>
+        <div class="time-slot" id="8:07"></div>
 
 
         <div class="time-slot">9:00 AM</div>
-        <div class="time-slot" id="9:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="9:00"></div>
+        <div class="time-slot" id="9:01"></div>
+        <div class="time-slot" id="9:03"></div>
+        <div class="time-slot" id="9:04"></div>
+        <div class="time-slot" id="9:05"></div>
+        <div class="time-slot" id="9:06"></div>
+        <div class="time-slot" id="9:07"></div>
 
 
         <div class="time-slot">10:00 AM</div>
-        <div class="time-slot" id="10:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="10:00"></div>
+        <div class="time-slot" id="10:01"></div>
+        <div class="time-slot" id="10:03"></div>
+        <div class="time-slot" id="10:04"></div>
+        <div class="time-slot" id="10:05"></div>
+        <div class="time-slot" id="10:06"></div>
+        <div class="time-slot" id="10:07"></div>
 
 
         <div class="time-slot">11:00 AM</div>
-        <div class="time-slot" id="11:00"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:01"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:03"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:04"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:05"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:06"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:07"><a href="event.html"></a></div>
+        <div class="time-slot" id="11:00"></div>
+        <div class="time-slot" id="11:01"></div>
+        <div class="time-slot" id="11:03"></div>
+        <div class="time-slot" id="11:04"></div>
+        <div class="time-slot" id="11:05"></div>
+        <div class="time-slot" id="11:06"></div>
+        <div class="time-slot" id="11:07"></div>
 
 
         <div class="time-slot">12:00 PM</div>
-        <div class="time-slot" id="12:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="12:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="12:00_pm"></div>
+        <div class="time-slot" id="12:01_pm"></div>
+        <div class="time-slot" id="12:03_pm"></div>
+        <div class="time-slot" id="12:04_pm"></div>
+        <div class="time-slot" id="12:05_pm"></div>
+        <div class="time-slot" id="12:06_pm"></div>
+        <div class="time-slot" id="12:07_pm"></div>
 
 
         <div class="time-slot">1:00 PM</div>
-        <div class="time-slot" id="1:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="1:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="1:00_pm"></div>
+        <div class="time-slot" id="1:01_pm"></div>
+        <div class="time-slot" id="1:03_pm"></div>
+        <div class="time-slot" id="1:04_pm"></div>
+        <div class="time-slot" id="1:05_pm"></div>
+        <div class="time-slot" id="1:06_pm"></div>
+        <div class="time-slot" id="1:07_pm"></div>
 
 
         <div class="time-slot">2:00 PM</div>
-        <div class="time-slot" id="2:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="2:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="2:00_pm"></div>
+        <div class="time-slot" id="2:01_pm"></div>
+        <div class="time-slot" id="2:03_pm"></div>
+        <div class="time-slot" id="2:04_pm"></div>
+        <div class="time-slot" id="2:05_pm"></div>
+        <div class="time-slot" id="2:06_pm"></div>
+        <div class="time-slot" id="2:07_pm"></div>
 
 
         <div class="time-slot">3:00 PM</div>
-        <div class="time-slot" id="3:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="3:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="3:00_pm"></div>
+        <div class="time-slot" id="3:01_pm"></div>
+        <div class="time-slot" id="3:03_pm"></div>
+        <div class="time-slot" id="3:04_pm"></div>
+        <div class="time-slot" id="3:05_pm"></div>
+        <div class="time-slot" id="3:06_pm"></div>
+        <div class="time-slot" id="3:07_pm"></div>
 
 
         <div class="time-slot">4:00 PM</div>
-        <div class="time-slot" id="4:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="4:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="4:00_pm"></div>
+        <div class="time-slot" id="4:01_pm"></div>
+        <div class="time-slot" id="4:03_pm"></div>
+        <div class="time-slot" id="4:04_pm"></div>
+        <div class="time-slot" id="4:05_pm"></div>
+        <div class="time-slot" id="4:06_pm"></div>
+        <div class="time-slot" id="4:07_pm"></div>
 
         <div class="time-slot">5:00 PM</div>
-        <div class="time-slot" id="5:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="5:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="5:00_pm"></div>
+        <div class="time-slot" id="5:01_pm"></div>
+        <div class="time-slot" id="5:03_pm"></div>
+        <div class="time-slot" id="5:04_pm"></div>
+        <div class="time-slot" id="5:05_pm"></div>
+        <div class="time-slot" id="5:06_pm"></div>
+        <div class="time-slot" id="5:07_pm"></div>
 
 
         <div class="time-slot">6:00 PM</div>
-        <div class="time-slot" id="6:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="6:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="6:00_pm"></div>
+        <div class="time-slot" id="6:01_pm"></div>
+        <div class="time-slot" id="6:03_pm"></div>
+        <div class="time-slot" id="6:04_pm"></div>
+        <div class="time-slot" id="6:05_pm"></div>
+        <div class="time-slot" id="6:06_pm"></div>
+        <div class="time-slot" id="6:07_pm"></div>
 
 
         <div class="time-slot">7:00 PM</div>
-        <div class="time-slot" id="7:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="7:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="7:00_pm"></div>
+        <div class="time-slot" id="7:01_pm"></div>
+        <div class="time-slot" id="7:03_pm"></div>
+        <div class="time-slot" id="7:04_pm"></div>
+        <div class="time-slot" id="7:05_pm"></div>
+        <div class="time-slot" id="7:06_pm"></div>
+        <div class="time-slot" id="7:07_pm"></div>
 
         <div class="time-slot">8:00 PM</div>
-        <div class="time-slot" id="8:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="8:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="8:00_pm"></div>
+        <div class="time-slot" id="8:01_pm"></div>
+        <div class="time-slot" id="8:03_pm"></div>
+        <div class="time-slot" id="8:04_pm"></div>
+        <div class="time-slot" id="8:05_pm"></div>
+        <div class="time-slot" id="8:06_pm"></div>
+        <div class="time-slot" id="8:07_pm"></div>
 
         <div class="time-slot">9:00 PM</div>
-        <div class="time-slot" id="9:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="9:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="9:00_pm"></div>
+        <div class="time-slot" id="9:01_pm"></div>
+        <div class="time-slot" id="9:03_pm"></div>
+        <div class="time-slot" id="9:04_pm"></div>
+        <div class="time-slot" id="9:05_pm"></div>
+        <div class="time-slot" id="9:06_pm"></div>
+        <div class="time-slot" id="9:07_pm"></div>
 
         <div class="time-slot">10:00 PM</div>
-        <div class="time-slot" id="10:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="10:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="10:00_pm"></div>
+        <div class="time-slot" id="10:01_pm"></div>
+        <div class="time-slot" id="10:03_pm"></div>
+        <div class="time-slot" id="10:04_pm"></div>
+        <div class="time-slot" id="10:05_pm"></div>
+        <div class="time-slot" id="10:06_pm"></div>
+        <div class="time-slot" id="10:07_pm"></div>
 
         <div class="time-slot">11:00 PM</div>
-        <div class="time-slot" id="11:00_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:01_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:03_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:04_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:05_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:06_pm"><a href="event.html"></a></div>
-        <div class="time-slot" id="11:07_pm"><a href="event.html"></a></div>
+        <div class="time-slot" id="11:00_pm"></div>
+        <div class="time-slot" id="11:01_pm"></div>
+        <div class="time-slot" id="11:03_pm"></div>
+        <div class="time-slot" id="11:04_pm"></div>
+        <div class="time-slot" id="11:05_pm"></div>
+        <div class="time-slot" id="11:06_pm"></div>
+        <div class="time-slot" id="11:07_pm"></div>
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 //import supabase from "./supabaseClient";
 const{createClient} = window.supabase;
-const supabaseURL = "https://wfcsacqljwpwvjvswmdo.supabase.co";
+let supabaseURL = "https://wfcsacqljwpwvjvswmdo.supabase.co";
 const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmY3NhY3Fsandwd3ZqdnN3bWRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQwNzE0MjYsImV4cCI6MjAzOTY0NzQyNn0.VWdL47ee1oNEQipI3EgkgDOLn5zQL6CZYEg6J1c1CWM";
 
 supabase = createClient(supabaseURL, supabaseKEY);
