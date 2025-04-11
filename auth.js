@@ -1,4 +1,3 @@
-
 //initialize supabase
 const {createClient} = window.supabase;
 supabaseURL = "https://wfcsacqljwpwvjvswmdo.supabase.co";
@@ -13,7 +12,7 @@ const loginBtn = document.getElementById("Login-btn");loginBtn?.addEventListener
     if (error) {
         document.getElementById("error-msg").textContent = error.message;
     } else {
-        window.location.href = 'profile.html';
+         window.location.href = 'profile.html';
     }
 });
 
@@ -28,8 +27,18 @@ const signupBtn = document.getElementById("signup-btn");signupBtn?.addEventListe
     if(signupError){
         document.getElementById("error-msg").textContent = signupError.message;
     } else {
+        function getRandomTenDigitNumber() {
+            // Generate a random 10-digit number
+            const min = 1000000000; // Minimum 10-digit number
+            const max = 9999999999; // Maximum 10-digit number
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        const randomTenDigitNumber = getRandomTenDigitNumber();
+        console.log(`Random 10-digit number: ${randomTenDigitNumber}`);
+        //document.getElementById('sync-id').innerText = randomTenDigitNumber
         const{error: insertError} = await supabase.from('table1').insert([{
-            first_name: firstName, last_name: lastName, city: city, email: email
+            first_name: firstName, last_name: lastName, city: city, email: email, sync_Id: randomTenDigitNumber
         }]);
         if (insertError) {
             document.getElementById("error-msg").

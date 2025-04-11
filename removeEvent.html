@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sync with another user</title>
+    <title>Remove event</title>
     <link rel = "stylesheet" href="style.css">
 </head>
 <body>
 <div class = "container">
 
-    <h2>ARE YOU SURE?</h2>
+    <h2>Remove an event on your calendar via name:</h2>
+    <input type = "text" id = "eventName_removed" placeholder = "Name of event" required>
+    <button id = "removeEvent-Btn">REMOVE THE EVENT ---></button>
 
-    <button id = "yes">YES</button>
-    <button id = "no">NO</button>
-    <p id = "error_sync_accept-msg"></p>
     <a href = "calendar.html"> Cancel </a>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src = "auth.js"></script>
+<script src = "removeEventData.js"></script>
 </body>
 </html>

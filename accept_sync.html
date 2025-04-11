@@ -1,24 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Accept request</title>
+    <title>Sync with another user</title>
     <link rel = "stylesheet" href="style.css">
 </head>
 <body>
 <div class = "container">
 
-    <h2>Accept Sync request?</h2>
-
-    <button id = "accept">Accept</button>
-    <button id = "deny">Deny</button>
-    <p id = "error_sync_accept-msg"></p>
-    <a href = "calendar.html"> Cancel </a>
-
+    <h2>Input Sync ID of other party:</h2>
+    <input type = "password" id = "Sync_ID" placeholder = "Sync ID" required>
+    <button id = "yesSyncBtn">CONTINUE WITH SYNC ---></button>
+    <p id = "error-msg"></p>
+    <a href = "sync.html"> Cancel </a>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src = "auth.js"></script>
+<script src = "sync.js"></script>
 </body>
 </html>

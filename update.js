@@ -1,4 +1,3 @@
-/*
 const { createClient } = window.supabase;
 let supabaseURL = "https://wfcsacqljwpwvjvswmdo.supabase.co";
 let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmY3NhY3Fsandwd3ZqdnN3bWRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQwNzE0MjYsImV4cCI6MjAzOTY0NzQyNn0.VWdL47ee1oNEQipI3EgkgDOLn5zQL6CZYEg6J1c1CWM"
@@ -46,7 +45,6 @@ document.getElementById('update-button').addEventListener('click', async () => {
         return;
     }
     const { user } = sessionData.session;
-
     try {
         // Update the data in Supabase table by matching with email
         const { data, error } = await supabase
@@ -69,4 +67,3 @@ document.getElementById('update-button').addEventListener('click', async () => {
         alert('An unexpected error occurred. Please try again later.');
     }
 });
-*/

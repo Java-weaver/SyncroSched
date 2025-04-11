@@ -1,13 +1,15 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: cornflowerblue;
+    background-color: #ffabc3;
+    //background-image: radial-gradient(#ff0e0e, transparent 15%),
+     //linear-gradient(45deg, transparent 52%, #4CAF50, #466aee, transparent 52%),
+     //linear-gradient(135deg, transparent 52%, #4CAF50, #466aee, transparent 52%);
 }
-
 .container{
     max-width: 480px;
     margin: 50px auto;
     padding: 20px;
-    background-color: white;
+    background-color: #F1F58F;
     box-Shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
 button{
@@ -18,11 +20,12 @@ button{
 button:hover{
     background-color: cadetblue;
 }
-
 #error-msg{
     color: red;
-
 }
 .highlight {
-    background-color: #ffcc00; /* Highlight color */
+    background-color: #ffb700; /* Highlight color */
+}
+.gradient {
+    background-color: linear /* Highlight color */
 }

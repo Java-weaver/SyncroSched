@@ -33,25 +33,23 @@ async function fetchProfile() {
             <p><strong>Last Name:</strong> ${userProfile.last_name}</p>
             <p><strong>Email:</strong> ${userProfile.email}</p>
             <p><strong>City:</strong> ${userProfile.city}</p>
+            <p><strong>Sync Id:</strong> ${userProfile.sync_Id}</p>
         `;
     } else {
         profileDataDiv.innerHTML = '<p>No user profile found</p>';
     }
 }
 fetchProfile().catch(error => console.error('Error fetching profile:', error));
-
 async function updateProfileField(field, value) {
     const userProfile = await getUserProfile();
     if (!userProfile) {
         console.error('User profile not found, cannot update.');
         return;
     }
-
     const { data, error } = await supabase
         .from('table1')
         .update({ [field]: value })
         .eq('email', userProfile.email);
-
     if (error) {
         console.error(`Error updating ${field}:`, error);
     } else {
@@ -73,4 +71,20 @@ document.getElementById("updateLn-btn")?.addEventListener("click", async () => {
 document.getElementById("updateC-btn")?.addEventListener("click", async () => {
     const city = document.getElementById("city").value;
     await updateProfileField('city', city);
+});
+document.getElementById("updateS-btn")?.addEventListener("click", async () => {
+    function getRandomTenDigitNumber() {
+        // Generate a random 10-digit number
+        const min = 1000000000; // Minimum 10-digit number
+        const max = 9999999999; // Maximum 10-digit number
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const randomTenDigitNumber = getRandomTenDigitNumber();
+    console.log(`Random 10-digit number: ${randomTenDigitNumber}`);
+    await updateProfileField('sync_Id', randomTenDigitNumber);
+
+    //const sync_Id = document.getElementById('sync-id');
+    //sync_Id.innerText = randomTenDigitNumber;
+
+    document.getElementById('sync-id').innerText = randomTenDigitNumber
 });

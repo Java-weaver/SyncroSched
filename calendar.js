@@ -13,7 +13,7 @@ function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     monthYear.textContent = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
-
+    document.getElementById('Month').innerText = monthYear.textContent
     // Clear previous days
     daysContainer.innerHTML = '';
 
@@ -33,15 +33,103 @@ function renderCalendar() {
         dayButton.classList.add('day');
         dayButton.textContent = day;
 
-        // Set data-date attribute for highlighting
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        dayButton.setAttribute('data-date', dateStr);
-
         dayButton.onclick = () => {
-            highlightWeek(day, firstDay);
-            showDayOfWeek(day, month, year);
-        };
+            // Clear previous highlights
+            const highlightedDays = document.querySelectorAll('.highlight');
+            highlightedDays.forEach(day => day.classList.remove('highlight'));
 
+            const clickedDate = new Date(year, month, day);
+            const clickedDay = clickedDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+            // Highlight the entire week
+            for (let i = 0; i < 7; i++) {
+                const weekDay = new Date(clickedDate);
+                weekDay.setDate(clickedDate.getDate() - clickedDay + i); // Adjust to the correct day of the week
+
+                // Check if the day is within the current month
+                if (weekDay.getMonth() === month) {
+                    const dayButtons = daysContainer.getElementsByClassName('day');
+                    for (let j = 0; j < dayButtons.length; j++) {
+                        if (dayButtons[j].textContent == weekDay.getDate()) {
+                            dayButtons[j].classList.add('highlight');
+                        }
+                    }
+                }
+            }
+
+            const dayName = clickedDate.toLocaleString('default', { weekday: 'long' });
+            alert(`You clicked on ${day} which is a ${dayName}`);
+            if(clickedDay === 0) {
+                document.getElementById('Month').innerText = monthYear.textContent
+                document.getElementById('Sunday').innerText = day
+                document.getElementById('Monday').innerText = day+1
+                document.getElementById('Tuesday').innerText = day+2
+                document.getElementById('Wednesday').innerText = day+3
+                document.getElementById('Thursday').innerText = day+4
+                document.getElementById('Friday').innerText = day+5
+                document.getElementById('Saturday').innerText = day+6
+            }
+            else if (clickedDay === 1){
+                document.getElementById('Month').innerText = monthYear.textContent
+                document.getElementById('Monday').innerText = day
+                document.getElementById('Tuesday').innerText = day+1
+                document.getElementById('Wednesday').innerText = day+2
+                document.getElementById('Thursday').innerText = day+3
+                document.getElementById('Friday').innerText = day+4
+                document.getElementById('Saturday').innerText = day+5
+                document.getElementById('Sunday').innerText = day-1
+            }
+            else if (clickedDay === 2){
+                document.getElementById('Month').innerText = monthYear.textContent
+                document.getElementById('Tuesday').innerText = day
+                document.getElementById('Wednesday').innerText = day+1
+                document.getElementById('Thursday').innerText = day+2
+                document.getElementById('Friday').innerText = day+3
+                document.getElementById('Saturday').innerText = day+4
+                document.getElementById('Sunday').innerText = day-2
+                document.getElementById('Monday').innerText = day-1
+            }
+            else if (clickedDay === 3){
+                document.getElementById('Month').innerText = monthYear.textContent
+                document.getElementById('Wednesday').innerText = day
+                document.getElementById('Thursday').innerText = day+1
+                document.getElementById('Friday').innerText = day+2
+                document.getElementById('Saturday').innerText = day+3
+                document.getElementById('Sunday').innerText = day-3
+                document.getElementById('Monday').innerText = day-2
+                document.getElementById('Tuesday').innerText = day-1
+            }
+            else if (clickedDay === 4){
+                document.getElementById('Month').innerText = monthYear.textContent
+                document.getElementById('Thursday').innerText = day
+                document.getElementById('Friday').innerText = day+1
+                document.getElementById('Saturday').innerText = day+2
+                document.getElementById('Sunday').innerText = day-4
+                document.getElementById('Monday').innerText = day-3
+                document.getElementById('Tuesday').innerText = day-2
+                document.getElementById('Wednesday').innerText = day-1
+            }
+            else if (clickedDay === 5){
+                document.getElementById('Month').innerText = monthYear.textContent
+                document.getElementById('Friday').innerText = day
+                document.getElementById('Saturday').innerText = day+1
+                document.getElementById('Sunday').innerText = day-5
+                document.getElementById('Monday').innerText = day-4
+                document.getElementById('Tuesday').innerText = day-3
+                document.getElementById('Wednesday').innerText = day-2
+                document.getElementById('Thursday').innerText = day-1
+            }
+            else if (clickedDay === 6){
+                document.getElementById('Month').innerText = monthYear.textContent
+                document.getElementById('Saturday').innerText = day
+                document.getElementById('Sunday').innerText = day-6
+                document.getElementById('Monday').innerText = day-5
+                document.getElementById('Tuesday').innerText = day-4
+                document.getElementById('Wednesday').innerText = day-3
+                document.getElementById('Thursday').innerText = day-2
+                document.getElementById('Friday').innerText = day-1
+            }
+        };
         daysContainer.appendChild(dayButton);
     }
     const totalCells = firstDay + totalDays;
@@ -52,7 +140,6 @@ function renderCalendar() {
         daysContainer.appendChild(emptyDay);
     }
 }
-
 /*function highlightWeek(day, firstDay) {
     // Clear previous highlights
     const allDays = document.querySelectorAll('.day');
@@ -72,7 +159,6 @@ function renderCalendar() {
     }
 }*/
 
-
 function showDayOfWeek(day, month, year) {
     const date = new Date(year, month, day);
     const options = { weekday: 'long' }; // Get the full name of the day
@@ -82,7 +168,6 @@ function showDayOfWeek(day, month, year) {
 
 // Initial render
 renderCalendar();
-
 prevButton.addEventListener('click', () => {
     console.log("yes1");
     currentDate.setMonth(currentDate.getMonth() - 1);
@@ -135,7 +220,7 @@ window.onload = () => {
             }
         });
     }
-};
+
 /*async function fetchRows(UEmail) {
     // Fetch a specific row from the 'events' table
     const { data, error } = await supabase
@@ -149,3 +234,39 @@ function navigateToForm() {
     // For example, you could change the window location or show a modal
     console.log("Navigating to form...");
 }*/
+
+
+
+}
+// Add event listeners to each time slot
+document.querySelectorAll('.time-slot').forEach(slot => {
+    slot.addEventListener('click', function() {
+        // Get the day from the corresponding row
+        const day = this.parentElement.previousElementSibling.textContent; // Get the day name from the previous sibling
+        const startTime = this.id.replace('_', ':'); // Convert ID back to HH:MM format
+        const endTime = prompt("Enter end time (HH:MM):");
+        if (endTime) {setGradient(day, startTime, endTime);}
+    });
+});
+/////// Fetch info from supabase in eventData.js
+// Function to parse time in "HH:MM" format
+function parseTime(time) {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes; // Convert to total minutes
+}
+// Function to set gradient based on time input
+function setGradient(day, startTime, endTime) {
+    // Finds percentage of time used in an hour
+    const startMinutes = parseTime(startTime);
+    const endMinutes = parseTime(endTime);
+    const rangeMinutes = endMinutes - startMinutes;
+    if (rangeMinutes <= 0) {alert("End time must be after start time."); return;}
+    const percentage = (rangeMinutes / 60) * 100;
+    // Get the time slot element for the specified day and start time
+    const timeSlotId = `${startTime.replace(':', '_')}_${day}`;
+    const timeSlot = document.getElementById(timeSlotId);
+    if (timeSlot) {
+        // Create the gradient style
+        timeSlot.style.background = `linear-gradient(to bottom, red ${percentage}%, #F1F58F ${100-percentage}%)`;
+    } else {alert("Time slot not found.");}
+}
