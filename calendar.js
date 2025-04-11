@@ -181,6 +181,7 @@ nextButton.addEventListener('click', () => {
 });
 
 settingButton.addEventListener('click', () => {
+    alert(`The update button works everything else is still under construction`);
     window.location.href = 'profile.html';
 });
 

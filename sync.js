@@ -75,6 +75,7 @@ agreeSyncBtn?.addEventListener("click", async () => {
         alert(`ERROR: Invalid Id inputted`);
         window.location.href = 'calendar.html';
     } else {
+        alert(`This is still in its early stages but from here you will be redirected and would actually be able to see others events.`);
         await sync();
     }
 });

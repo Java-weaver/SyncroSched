@@ -91,6 +91,7 @@ eventBtn?.addEventListener("click", async () => {
             if (error) {
                 console.error('Error fetching row:', error);
             } else {
+                alert(`Normally, from here this would redirect you to the calendar actually add your event from our data base but that is currently still under construction.`);
                 console.log('Fetched row:', data); // Log the entire row to the console
             }
         }
@@ -181,5 +182,6 @@ eventShareBtn?.addEventListener("click", async () => {
         document.getElementById("error-msg").textContent = insertError.message;
         return
     }
+    alert(`Normally, from here this would redirect you to the calendar actually add your event from our data base but that is currently still under construction.`);
     window.location.href = 'calendar.html';
 });
