@@ -12,7 +12,6 @@ const loginBtn = document.getElementById("Login-btn");loginBtn?.addEventListener
     if (error) {
         document.getElementById("error-msg").textContent = error.message;
     } else {
-        alert(`Hello! Thank you for testing our app SyncroSched. Please keep in mind that the app still has A LOT of bugs and some buttons just dont work and for good reason(prob not finished) so when clicking around and exploring this app please keep that in mind. Thank you and welcome!`);
          window.location.href = 'calendar.html';
     }
 });

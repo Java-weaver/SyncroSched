@@ -8,15 +8,32 @@
 <body>
 <div class = "container">
     <h2>User currently that you are in sync with:</h2>
-    <p id = "error_get_sync-msg"></p>
+    <button id = "syncGen">Generate synced users</button>
+    <p id = "get_sync"></p>
     <h2>Remove Users:</h2>
-    <input type = "email" id = "email_to_share" placeholder = "Email" required>
+    <input type = "email" id = "email_to_remove" placeholder = "Email" required>
     <button id = "remove-btn">REMOVE</button>
     <p id = "error_remove_sync-msg"></p>
     <a href = "calendar.html"> Go back to calendar </a>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src = "auth.js"></script>
+<script src = "remove_sync.js"></script>
+<script src="theme.js"></script>
+<!-- JavaScript for Theme Toggle -->
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+
+    // Apply saved theme on load
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const newTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+    });
+</script>
 </body>
 </html>

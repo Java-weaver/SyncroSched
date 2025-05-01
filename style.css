@@ -1,31 +1,77 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #ffabc3;
-    //background-image: radial-gradient(#ff0e0e, transparent 15%),
-     //linear-gradient(45deg, transparent 52%, #4CAF50, #466aee, transparent 52%),
-     //linear-gradient(135deg, transparent 52%, #4CAF50, #466aee, transparent 52%);
+
+/* Default (Dark Mode) */
+body {
+    font-family: "Copperplate Gothic Bold", sans-serif;
+    background-color: #353436;
+    color: #000000;
 }
-.container{
+
+/* Light Mode */
+body.light-mode {
+    background-color: #f5f5f5; /* Light background */
+    color: #000000; /* Dark text for light mode */
+}
+
+/* Container styling */
+.container {
     max-width: 480px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #F1F58F;
-    box-Shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    background-color: #b1aeb5; /* Dark mode background */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
-button{
+
+/* Light mode container styling */
+body.light-mode.container {
+    background-color: #ffffff; /* Light background for container */
+}
+
+/* Button styling */
+button {
     background-color: cadetblue;
     border: none;
     cursor: pointer;
+    padding: 10px 15px;
+    font-size: 16px;
 }
-button:hover{
-    background-color: cadetblue;
+
+/* Light mode button */
+body.light-mode button {
+    background-color: #4CAF50; /* Green button in light mode */
+    color: white;
 }
-#error-msg{
+
+button:hover {
+    background-color: darkcyan;
+}
+
+/* Light mode button hover */
+body.light-mode button:hover {
+    background-color: #45a049; /* Darker green on hover in light mode */
+}
+
+/* Links */
+a {
+    color: #3498db; /* Blue links in dark mode */
+    text-decoration: none;
+}
+
+/* Light mode links */
+body.light-mode a {
+    color: #2c3e50; /* Dark blue links in light mode */
+}
+
+/* Error Message */
+#error-msg {
     color: red;
 }
+
+/* Highlight */
 .highlight {
-    background-color: #ffb700; /* Highlight color */
+    background-color: #ffb700;
 }
-.gradient {
-    background-color: linear /* Highlight color */
+
+/* Light mode highlight */
+body.light-mode .highlight {
+    background-color: #f39c12; /* Lighter yellow in light mode */
 }

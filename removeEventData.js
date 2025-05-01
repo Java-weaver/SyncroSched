@@ -5,7 +5,6 @@ supabase= createClient(supabaseURL, supabaseAnonKey);
 
 const removeEventBtn = document.getElementById("removeEvent-Btn");
 removeEventBtn?.addEventListener("click", async () => {
-    const otherEmail = localStorage.getItem('otherEmail');
     const event_toBeRemoved = document.getElementById("eventName_removed").value;
 
     async function getUserProfile() {
@@ -28,44 +27,83 @@ removeEventBtn?.addEventListener("click", async () => {
     }
     const userProfile = await getUserProfile();
 
-
-    let isAlrSynced = false
-
-    const { data, error3 } = await supabase
+    const { data, error } = await supabase
         .from('table3')
-        .select(otherEmail) // Select all columns
-        .eq('email_event', userProfile)
-    if (error3) {
-        console.error('Error fetching row:', error3);
+        .select('*') // Select all columns
+        .or(`primarySyncEmail.eq.${userProfile.email},secondarySyncEmail.eq.${userProfile.email}`);
+    if (error) {
+        console.error('Error fetching row:', error);
     } else {
         console.log('Fetched row:', data); // Log the entire row to the console
-        isAlrSynced = true;
     }
 
-    if(isAlrSynced) {
-        const { error3 } = await supabase
-            .from('table2')
-            .delete()
-            .match({ event_email: userProfile, otherEmail: otherEmail, eventName: event_toBeRemoved });
+    for (let i = 0; i <= data.length - 1; i++) {
+        const SyncedFromSupabaseone = data?.[i]?.primarySyncEmail;
+        const SyncedFromSupabasetwo = data?.[i]?.secondarySyncEmail;
 
-        if (error3) {
-            console.error('Error deleting row(s):', error3);
-        } else {
-            console.log('Rows have been deleted');
-        }
-        window.location.href = 'calendar.html';
-    } else {
-        const { error3 } = await supabase
-            .from('table2')
-            .delete()
-            .match({ event_email: userProfile, eventName: event_toBeRemoved });
+        console.log('User  profile', userProfile.email);
+        console.log('Primary', SyncedFromSupabaseone);
+        console.log('Secondary', SyncedFromSupabasetwo);
 
-        if (error3) {
-            console.error('Error deleting row(s):', error3);
+        if (userProfile.email === SyncedFromSupabaseone) {
+            const { data, error } = await supabase
+                .from('table2')
+                .delete()
+                .eq('email_event', SyncedFromSupabasetwo)
+                .eq('eventName', event_toBeRemoved);
+
+            if (error) {
+                console.error('Error deleting row:', error);
+                return;
+            }
+
+        } else if (userProfile.email === SyncedFromSupabasetwo) {
+            const { data, error } = await supabase
+                .from('table2')
+                .delete()
+                .eq('email_event', SyncedFromSupabaseone)
+                .eq('eventName', event_toBeRemoved);
+
+            if (error) {
+                console.error('Error deleting row:', error);
+                return;
+            }
+
         } else {
-            console.log('Rows have been deleted');
+            const { data, error } = await supabase
+                .from('table2')
+                .delete()
+                .eq('email_event', userProfile.email)
+                .eq('eventName', event_toBeRemoved);
+
+            if (error) {
+                console.error('Error deleting row:', error);
+                return;
+            }
+
+            let deletedCurrentUser_Event = true;
+            localStorage.setItem('deletedCurrentUser Event', deletedCurrentUser_Event.toString());
         }
-        window.location.href = 'calendar.html';
+        const deletedCurrentUser_Event_String = localStorage.getItem('deletedCurrentUser Event'); // Get the string from localStorage
+        const deletedCurrentUser_Event = deletedCurrentUser_Event_String === 'true';
+
+        console.log(deletedCurrentUser_Event);
+
+        if (deletedCurrentUser_Event === false) {
+            const { data, error } = await supabase
+                .from('table2')
+                .delete()
+                .eq('email_event', userProfile.email)
+                .eq('eventName', event_toBeRemoved);
+
+            if (error) {
+                console.error('Error deleting row:', error);
+                return;
+            }
+        }
+
+        console.log('00000000000000000000000000000000000000000000000000000000000000000000000000');
+
     }
-
+    window.location.href = 'calendar.html';
 });

@@ -88,3 +88,6 @@ document.getElementById("updateS-btn")?.addEventListener("click", async () => {
 
     document.getElementById('sync-id').innerText = randomTenDigitNumber
 });
+document.getElementById("remove-btn")?.addEventListener("click", async () => {
+    window.location.href = 'remove_sync.html';
+});

@@ -9,8 +9,8 @@ eventBtn?.addEventListener("click", async () => {
     const startTime = document.getElementById("event_time_start").value;
     const endTime = document.getElementById("event_time_end").value;
     const eventName = document.getElementById("name_event").value;
-    const dropdown = document.getElementById('dayDropdown');
-    const selectedValue = dropdown.value;
+    //const dropdown = document.getElementById('dayDropdown');
+    //const selectedValue = dropdown.value;
     const originalEmail = localStorage.getItem('originalEmail');
     console.log(originalEmail);
     const otherEmail = localStorage.getItem('otherEmail');
@@ -18,9 +18,19 @@ eventBtn?.addEventListener("click", async () => {
     console.log("Start Time:", startTime);
     console.log("End Time:", endTime);
     console.log("Event Name:", eventName);
+    const eventDate = document.getElementById("event_date").value;
+
+    const [year, month1, day10] = eventDate.split('-').map(Number);
+    // Create a Date object in UTC
+    const dAte = new Date(Date.UTC(year, month1 , day10 + 1)); // month is 0-indexed
+    const option = { weekday: 'long' };
+    const dayName = dAte.toLocaleDateString('en-US', option);
+    //const selectedValue = dayName
+    localStorage.setItem('day10', day10.toString());
+
 
     // Input validation
-    if (!startTime || !endTime || !eventName || !selectedValue) {
+    if (!startTime || !endTime || !eventName || !dayName) {
         document.getElementById("error-msg").textContent = "All fields are required.";
         return; // Exit the function if any field is empty 
     }
@@ -75,7 +85,9 @@ eventBtn?.addEventListener("click", async () => {
         eventTime_end: endTime,
         eventName: eventName,
         email_event: emailEvent,
-        day_event: selectedValue,
+        day_event: dayName,
+        event_monthDate: day10,
+        event_month: month1,
     }]);
     if (insertError) {
         console.error("Insert Error:", insertError);
@@ -91,7 +103,6 @@ eventBtn?.addEventListener("click", async () => {
             if (error) {
                 console.error('Error fetching row:', error);
             } else {
-                alert(`Normally, from here this would redirect you to the calendar actually add your event from our data base but that is currently still under construction.`);
                 console.log('Fetched row:', data); // Log the entire row to the console
             }
         }
@@ -134,19 +145,29 @@ eventShareBtn?.addEventListener("click", async () => {
     const startTime = document.getElementById("event_time_start").value;
     const endTime = document.getElementById("event_time_end").value;
     const eventName = document.getElementById("name_event").value;
-    const dropdown = document.getElementById('dayDropdown');
-    const selectedValue = dropdown.value;
+    //const dropdown = document.getElementById('dayDropdown');
+    //const selectedValue = dropdown.value;
     const otherEmail = localStorage.getItem('otherEmail');
     console.log(otherEmail);
+    const eventDate = document.getElementById("event_date").value;
+    console.log("EVENT DATE:", eventDate);
 
+    const [year, month2, day9] = eventDate.split('-').map(Number);
+
+    // Create a Date object in UTC
+    const dAte = new Date(Date.UTC(year, month2 , day9 + 1)); // month is 0-indexed
+    const option = { weekday: 'long' };
+    const dayName = dAte.toLocaleDateString('en-US', option);
+    //const selectedValue = dayName
+    localStorage.setItem('day10', day9.toString());
 
     console.log("Start Time:", startTime);
     console.log("End Time:", endTime);
     console.log("Event Name:", eventName);
-    console.log("Day of event selected:", selectedValue);
+    console.log("Day of event selected:", dayName);
 
     // Input validation
-    if (!startTime || !endTime || !eventName || !selectedValue) {
+    if (!startTime || !endTime || !eventName || !dayName) {
         document.getElementById("error-msg").textContent = "All fields are required.";
         return; // Exit the function if any field is empty
     }
@@ -157,31 +178,76 @@ eventShareBtn?.addEventListener("click", async () => {
         return; // Exit the function if validation fails
     }
 
+    const { data, error } = await supabase
+        .from('table3')
+        .select('*') // Select all columns
+        .or(`primarySyncEmail.eq.${userProfile.email},secondarySyncEmail.eq.${userProfile.email}`);
+    if (error) {
+        console.error('Error fetching row:', error);
+    } else {
+        console.log('Fetched row:', data); // Log the entire row to the console
+    }
+
     // Insert data into Supabase
     const {error: insertError} = await supabase.from('table2').insert([{
         eventTime_start: startTime,
         eventTime_end: endTime,
         eventName: eventName,
         email_event: userProfile.email,
-        day_event: selectedValue,
+        day_event: dayName,
+        event_monthDate: day9,
+        event_month: month2,
     }]);
     if (insertError) {
         console.error("Insert Error:", insertError);
         document.getElementById("error-msg").textContent = insertError.message;
         return
     }
-    const {error: insertError2} = await supabase.from('table2').insert([{
-        eventTime_start: startTime,
-        eventTime_end: endTime,
-        eventName: eventName,
-        email_event: otherEmail,
-        day_event: selectedValue,
-    }]);
-    if (insertError) {
-        console.error("Insert Error T:", insertError2);
-        document.getElementById("error-msg").textContent = insertError.message;
-        return
+
+    for (let i = 0; i <= data.length - 1; i++) {
+        const SyncedFromSupabaseone = data?.[i]?.primarySyncEmail;
+        const SyncedFromSupabasetwo = data?.[i]?.secondarySyncEmail;
+
+        console.log('User  profile', userProfile.email);
+        console.log('Primary', SyncedFromSupabaseone);
+        console.log('Secondary', SyncedFromSupabasetwo);
+
+        if (userProfile.email === SyncedFromSupabaseone) {
+            const {error: insertError2} = await supabase.from('table2').insert([{
+                eventTime_start: startTime,
+                eventTime_end: endTime,
+                eventName: eventName,
+                email_event: SyncedFromSupabasetwo,
+                day_event: dayName,
+                event_monthDate: day9,
+                event_month: month2,
+            }]);
+            if (insertError) {
+                console.error("Insert Error T:", insertError2);
+                document.getElementById("error-msg").textContent = insertError.message;
+                return
+            }
+        } else if (userProfile.email === SyncedFromSupabasetwo) {
+            const {error: insertError2} = await supabase.from('table2').insert([{
+                eventTime_start: startTime,
+                eventTime_end: endTime,
+                eventName: eventName,
+                email_event: SyncedFromSupabaseone,
+                day_event: dayName,
+                event_monthDate: day9,
+                event_month: month2,
+            }]);
+            if (insertError) {
+                console.error("Insert Error T:", insertError2);
+                document.getElementById("error-msg").textContent = insertError.message;
+                return
+            }
+        } else {
+            alert('You have nobody Synced');
+        }
+
+        console.log('00000000000000000000000000000000000000000000000000000000000000000000000000');
+
     }
-    alert(`Normally, from here this would redirect you to the calendar actually add your event from our data base but that is currently still under construction.`);
     window.location.href = 'calendar.html';
 });

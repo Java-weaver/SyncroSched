@@ -10,12 +10,10 @@ syncBtn?.addEventListener("click", async () => {
     localStorage.setItem('otherEmail', otherEmail);
     //const originalEmail = localStorage.getItem('originalEmail');
     //console.log(originalEmail);
-
     async function getUserProfile() {
         const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
         if (sessionError || !sessionData.session) {
             console.log('No valid session found:', sessionError);
-
             return null;
         }
         const userEmail = sessionData.session.user.email;
@@ -41,10 +39,29 @@ agreeSyncBtn?.addEventListener("click", async () => {
     const otherEmail = localStorage.getItem('otherEmail');
     const originalEmail = localStorage.getItem('originalEmail');
 
+    async function getUserProfile() {
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError || !sessionData.session) {
+            console.log('No valid session found:', sessionError);
+            return null;
+        }
+        const userEmail = sessionData.session.user.email;
+        const { data: userProfile, error } = await supabase
+            .from('table1')
+            .select('*')
+            .eq('email', userEmail)
+            .single();
+        if (error){
+            console.error('Error fetching user data:', error);
+            return null;
+        }
+        return userProfile;
+    }
+    const userProfile = await getUserProfile();
+
     if(otherEmail === originalEmail){
         console.error('Error fetching row:', 'Attempting to sync an email with itself');
-        alert(`ERROR: Attempting to sync an email with itself`);
-
+        alert(`Attempting to sync an email with itself`);
         window.location.href = 'calendar.html';
     }
 
@@ -54,6 +71,8 @@ agreeSyncBtn?.addEventListener("click", async () => {
         .eq('email', otherEmail) // Replace 'id' and '1' with your column and value to filter
     if (error) {
         console.error('Error fetching row:', error);
+        alert(`The email you put in does not exist.`);
+        window.location.href = 'calendar.html';
     } else {
         console.log(otherProfile); // Log the entire row to the console
     }
@@ -69,13 +88,23 @@ agreeSyncBtn?.addEventListener("click", async () => {
     console.log(typeof syncIdFromSupabase); // probably "number"
     console.log(typeof synciD);             // definitely "string"
 
-    //4879234564
+    const { data: twoOrLess, error9 } = await supabase
+        .from('table3')
+        .select('*') // Select all columns
+        .or(`primarySyncEmail.eq.${userProfile.email},secondarySyncEmail.eq.${userProfile.email}`);
+    if (error) {
+        console.error('Error fetching row:', error9);
+    } else {
+        console.log('Fetched row:', twoOrLess); // Log the entire row to the console
+    }
 
-    if (String(syncIdFromSupabase) !== String(synciD)) {
-        alert(`ERROR: Invalid Id inputted`);
+    if(twoOrLess.length >= 2){//TEST THIS and remove if it dont work
+        alert(`Each user on the Free SyncroSched plan only get the ability to only sync to 2 people due too data storing. If you wish to have the ability to sync to more people, consider upgrading to a paid plan.`);
+        window.location.href = 'calendar.html';
+    } else if (String(syncIdFromSupabase) !== String(synciD)) {
+        alert(`The sync ID is incorrect`);
         window.location.href = 'calendar.html';
     } else {
-        alert(`This is still in its early stages but from here you will be redirected and would actually be able to see others events.`);
         await sync();
     }
 });
@@ -207,7 +236,6 @@ agreeShareBtn?.addEventListener("click", async () => {
 
 async function share(){
     const otherEmail = localStorage.getItem('otherEmail');
-
     async function fetchRowsSnap(UEmail) {
         // Fetch a specific row from the 'events' table
         const { data, error } = await supabase
