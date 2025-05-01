@@ -50,7 +50,7 @@ async function updateProfileField(field, value) {
         .from('table1')
         .update({ [field]: value })
         .eq('email', userProfile.email);
-    if (error) {
+    if (error){
         console.error(`Error updating ${field}:`, error);
     } else {
         console.log(`${field} updated successfully:`, data);

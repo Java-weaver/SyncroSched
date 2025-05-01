@@ -1,23 +1,55 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Display Data</title>
-    <link rel = "stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class = "container">
+<div class="container">
+    <!-- Toggle Button for Theme inside the container -->
+    <button id="theme-toggle">Toggle Theme</button>
+
     <h2>Your Profile</h2>
     <div id="profile-data"></div>
-    <a href = "calendar.html">Back</a>
-    <a href = "update.html">Update</a>
-    <button id = "remove-btn"> View current connected users </button>
-    <button id = "logout-btn"> Logout </button>
+    <a href="calendar.html">Back</a>
+    <a href="update.html">Update</a>
+    <button id="remove-btn"> View current connected users </button>
+    <button id="logout-btn"> Logout </button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src = "data.js"></script>
+<script src="data.js"></script>
+
+<!-- JavaScript for Theme Toggle -->
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+
+    // Apply saved theme on load
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const newTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+    });
+</script>
+<!-- JavaScript for Theme Toggle -->
+<script>
+    const toggleBtn = document.getElementById('theme-toggle');
+
+    // Apply saved theme on load
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const newTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+    });
+</script>
 </body>
 </html>
